@@ -24,6 +24,8 @@ public class AdMobPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "removeBanner", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "prepareInterstitial", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showInterstitial", returnType: CAPPluginReturnPromise),
+		CAPPluginMethod(name: "prepareOpen", returnType: CAPPluginReturnPromise),
+		CAPPluginMethod(name: "showOpen", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "prepareRewardVideoAd", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showRewardVideoAd", returnType: CAPPluginReturnPromise)
     ]
@@ -35,6 +37,7 @@ public class AdMobPlugin: CAPPlugin, CAPBridgedPlugin {
     private let adRewardExecutor = AdRewardExecutor()
     private let adRewardInterstitialExecutor = AdRewardInterstitialExecutor()
     private let consentExecutor = ConsentExecutor()
+	private let adOpenExecutor = AdOpenExecutor()
 
     /**
      * Enable SKAdNetwork to track conversions
@@ -46,6 +49,7 @@ public class AdMobPlugin: CAPPlugin, CAPBridgedPlugin {
         self.adRewardExecutor.plugin = self
         self.adRewardInterstitialExecutor.plugin = self
         self.adInterstitialExecutor.plugin = self
+		self.adOpenExecutor.plugin = self
         self.consentExecutor.plugin = self
         self.setRequestConfiguration(call)
 
@@ -143,6 +147,25 @@ public class AdMobPlugin: CAPPlugin, CAPBridgedPlugin {
             self.adInterstitialExecutor.showInterstitial(call)
         }
     }
+	
+	/**
+	 *  AdMob: Open
+	 *  https://developers.google.com/admob/ios/app-open
+	 */
+	@objc func prepareOpen(_ call: CAPPluginCall) {
+		let adUnitID = getAdId(call, "ca-app-pub-3940256099942544/5575463023")
+		let request = self.GADRequestWithOption(call.getBool("npa") ?? false)
+
+		DispatchQueue.main.async {
+			self.adOpenExecutor.prepareOpen(call, request, adUnitID)
+		}
+	}
+
+	@objc func showOpen(_ call: CAPPluginCall) {
+		DispatchQueue.main.async {
+			self.adOpenExecutor.showOpen(call)
+		}
+	}
 
     /**
      *  AdMob: Rewarded Ads
