@@ -84,6 +84,17 @@ export class AdMobWeb extends WebPlugin implements AdMobPlugin {
     console.log('showInterstitial');
   }
 
+  async prepareOpen(options: AdOptions): Promise<AdLoadInfo> {
+    console.log('prepareOpen', options);
+    return {
+      adUnitId: options.adId,
+    };
+  }
+
+  async showOpen(): Promise<void> {
+    console.log('showOpen');
+  }
+
   async prepareRewardVideoAd(options: AdOptions): Promise<AdLoadInfo> {
     console.log(options);
     return {

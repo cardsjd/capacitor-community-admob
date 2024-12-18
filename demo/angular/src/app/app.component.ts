@@ -21,7 +21,7 @@ export class AppComponent {
        * initialize() require after platform.ready();
        */
       AdMob.initialize({
-        testingDevices: ['2077ef9a63d2b398840261c8221a0c9b'],
+        testingDevices: ['2077ef9a63d2b398840261c8221a0c9b', '681965E4F8D5AB8B84F054F3BF672B85'],
         initializeForTesting: true,
       });
 

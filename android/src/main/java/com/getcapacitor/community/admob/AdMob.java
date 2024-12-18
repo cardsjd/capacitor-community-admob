@@ -13,6 +13,8 @@ import com.getcapacitor.community.admob.consent.AdConsentExecutor;
 import com.getcapacitor.community.admob.helpers.AuthorizationStatusEnum;
 import com.getcapacitor.community.admob.interstitial.AdInterstitialExecutor;
 import com.getcapacitor.community.admob.interstitial.InterstitialAdCallbackAndListeners;
+import com.getcapacitor.community.admob.open.AdOpenExecutor;
+import com.getcapacitor.community.admob.open.OpenAdCallbackAndListeners;
 import com.getcapacitor.community.admob.rewarded.AdRewardExecutor;
 import com.getcapacitor.community.admob.rewardedinterstitial.AdRewardInterstitialExecutor;
 import com.google.android.gms.ads.MobileAds;
@@ -52,6 +54,13 @@ public class AdMob extends Plugin {
         this::notifyListeners,
         getLogTag(),
         InterstitialAdCallbackAndListeners.INSTANCE
+    );
+    private final AdOpenExecutor adOpenExecutor = new AdOpenExecutor(
+        this::getContext,
+        this::getActivity,
+        this::notifyListeners,
+        getLogTag(),
+        OpenAdCallbackAndListeners.INSTANCE
     );
 
     private final AdConsentExecutor adConsentExecutor = new AdConsentExecutor(
@@ -164,6 +173,17 @@ public class AdMob extends Plugin {
     @PluginMethod
     public void showInterstitial(final PluginCall call) {
         adInterstitialExecutor.showInterstitial(call, this::notifyListeners);
+    }
+
+    @PluginMethod
+    public void prepareOpen(final PluginCall call) {
+        adOpenExecutor.prepareOpen(call, this::notifyListeners);
+    }
+
+    // Show open Ad
+    @PluginMethod
+    public void showOpen(final PluginCall call) {
+        adOpenExecutor.showOpen(call, this::notifyListeners);
     }
 
     @PluginMethod

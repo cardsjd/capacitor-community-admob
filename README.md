@@ -366,6 +366,13 @@ AdMob.addListener(RewardAdPluginEvents.Rewarded, async () => {
 * [`addListener(InterstitialAdPluginEvents.Dismissed, ...)`](#addlistenerinterstitialadplugineventsdismissed-)
 * [`addListener(InterstitialAdPluginEvents.FailedToShow, ...)`](#addlistenerinterstitialadplugineventsfailedtoshow-)
 * [`addListener(InterstitialAdPluginEvents.Showed, ...)`](#addlistenerinterstitialadplugineventsshowed-)
+* [`prepareOpen(...)`](#prepareopen)
+* [`showOpen()`](#showopen)
+* [`addListener(OpenAdPluginEvents.FailedToLoad, ...)`](#addlisteneropenadplugineventsfailedtoload-)
+* [`addListener(OpenAdPluginEvents.Loaded, ...)`](#addlisteneropenadplugineventsloaded-)
+* [`addListener(OpenAdPluginEvents.Dismissed, ...)`](#addlisteneropenadplugineventsdismissed-)
+* [`addListener(OpenAdPluginEvents.FailedToShow, ...)`](#addlisteneropenadplugineventsfailedtoshow-)
+* [`addListener(OpenAdPluginEvents.Showed, ...)`](#addlisteneropenadplugineventsshowed-)
 * [`prepareRewardVideoAd(...)`](#preparerewardvideoad)
 * [`showRewardVideoAd()`](#showrewardvideoad)
 * [`addListener(RewardAdPluginEvents.FailedToLoad, ...)`](#addlistenerrewardadplugineventsfailedtoload-)
@@ -760,6 +767,114 @@ addListener(eventName: InterstitialAdPluginEvents.Showed, listenerFunc: () => vo
 | ------------------ | ---------------------------------------------------------------------------------------- |
 | **`eventName`**    | <code><a href="#interstitialadpluginevents">InterstitialAdPluginEvents.Showed</a></code> |
 | **`listenerFunc`** | <code>() =&gt; void</code>                                                               |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### prepareOpen(...)
+
+```typescript
+prepareOpen(options: AdOptions) => Promise<AdLoadInfo>
+```
+
+Prepare Open banner
+
+| Param         | Type                                            | Description                        |
+| ------------- | ----------------------------------------------- | ---------------------------------- |
+| **`options`** | <code><a href="#adoptions">AdOptions</a></code> | <a href="#adoptions">AdOptions</a> |
+
+**Returns:** <code>Promise&lt;<a href="#adloadinfo">AdLoadInfo</a>&gt;</code>
+
+--------------------
+
+
+### showOpen()
+
+```typescript
+showOpen() => Promise<void>
+```
+
+Show Open ad when it’s ready
+
+--------------------
+
+
+### addListener(OpenAdPluginEvents.FailedToLoad, ...)
+
+```typescript
+addListener(eventName: OpenAdPluginEvents.FailedToLoad, listenerFunc: (error: AdMobError) => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **`eventName`**    | <code><a href="#openadpluginevents">OpenAdPluginEvents.FailedToLoad</a></code> |
+| **`listenerFunc`** | <code>(error: <a href="#admoberror">AdMobError</a>) =&gt; void</code>          |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener(OpenAdPluginEvents.Loaded, ...)
+
+```typescript
+addListener(eventName: OpenAdPluginEvents.Loaded, listenerFunc: (info: AdLoadInfo) => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                     |
+| ------------------ | ------------------------------------------------------------------------ |
+| **`eventName`**    | <code><a href="#openadpluginevents">OpenAdPluginEvents.Loaded</a></code> |
+| **`listenerFunc`** | <code>(info: <a href="#adloadinfo">AdLoadInfo</a>) =&gt; void</code>     |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener(OpenAdPluginEvents.Dismissed, ...)
+
+```typescript
+addListener(eventName: OpenAdPluginEvents.Dismissed, listenerFunc: () => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                        |
+| ------------------ | --------------------------------------------------------------------------- |
+| **`eventName`**    | <code><a href="#openadpluginevents">OpenAdPluginEvents.Dismissed</a></code> |
+| **`listenerFunc`** | <code>() =&gt; void</code>                                                  |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener(OpenAdPluginEvents.FailedToShow, ...)
+
+```typescript
+addListener(eventName: OpenAdPluginEvents.FailedToShow, listenerFunc: (error: AdMobError) => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| **`eventName`**    | <code><a href="#openadpluginevents">OpenAdPluginEvents.FailedToShow</a></code> |
+| **`listenerFunc`** | <code>(error: <a href="#admoberror">AdMobError</a>) =&gt; void</code>          |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### addListener(OpenAdPluginEvents.Showed, ...)
+
+```typescript
+addListener(eventName: OpenAdPluginEvents.Showed, listenerFunc: () => void) => Promise<PluginListenerHandle>
+```
+
+| Param              | Type                                                                     |
+| ------------------ | ------------------------------------------------------------------------ |
+| **`eventName`**    | <code><a href="#openadpluginevents">OpenAdPluginEvents.Showed</a></code> |
+| **`listenerFunc`** | <code>() =&gt; void</code>                                               |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
@@ -1251,6 +1366,17 @@ From T, pick a set of properties whose keys are in the union K
 | **`Showed`**       | <code>'interstitialAdShowed'</code>       | Emits when the Interstitial ad is visible to the user                                  |
 | **`FailedToShow`** | <code>'interstitialAdFailedToShow'</code> | Emits when the Interstitial ad is failed to show                                       |
 | **`Dismissed`**    | <code>'interstitialAdDismissed'</code>    | Emits when the Interstitial ad is not visible to the user anymore.                     |
+
+
+#### OpenAdPluginEvents
+
+| Members            | Value                             | Description                                                                      |
+| ------------------ | --------------------------------- | -------------------------------------------------------------------------------- |
+| **`Loaded`**       | <code>'openAdLoaded'</code>       | Emits after trying to prepare an open ad, when it is loaded and ready to be show |
+| **`FailedToLoad`** | <code>'openAdFailedToLoad'</code> | Emits after trying to prepare an open ad, when it could not be loaded            |
+| **`Showed`**       | <code>'openAdShown'</code>        | Emits when the open ad is visible to the user                                    |
+| **`FailedToShow`** | <code>'openAdFailedToShow'</code> | Emits when the open ad is failed to show                                         |
+| **`Dismissed`**    | <code>'openAdDismissed'</code>    | Emits when the open ad is not visible to the user anymore.                       |
 
 
 #### RewardAdPluginEvents
